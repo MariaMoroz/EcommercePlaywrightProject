@@ -15,22 +15,27 @@ public abstract class BaseTest {
     }
 
     @BeforeClass
-    protected void createPlaywright() {
+    protected void launchBrowser() {
         playwright = Playwright.create();
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
     }
 
     @BeforeMethod
-    protected void launchBrowser() {
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+    protected void createContextAndPage() {
+
         context = browser.newContext();
         page = context.newPage();
 
         page.navigate("https://magento.softwaretestingboard.com/");
     }
 
+    @AfterMethod
+    void closeContext() {
+        context.close();
+    }
+
     @AfterClass
     protected void closeBrowser() {
-        context.close();
         playwright.close();
     }
 }
