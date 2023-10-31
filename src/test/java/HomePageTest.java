@@ -47,7 +47,7 @@ public class HomePageTest extends BaseTest {
         String[] expectedMenuItems = {"What's New", "Women", "Men", "Gear", "Training", "Sale"};
 
         Locator navigationMenu = getPage().locator("css=div[id='store.menu'] nav.navigation");
-        Locator menuItems = getPage().locator("css=div[id='store.menu']>nav.navigation>ul >li>a>span");
+        Locator menuItems = getPage().locator("css=div[id='store.menu']>nav.navigation>ul >li>a");
 
         assertThat(navigationMenu).isVisible();
         assertThat(menuItems).hasCount(expectedMenuItems.length);

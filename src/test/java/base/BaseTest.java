@@ -14,18 +14,15 @@ public abstract class BaseTest {
         return page;
     }
 
-    @BeforeSuite
-    protected void beforeSuite() {
+    @BeforeClass
+    protected void launchBrowser() {
         playwright = Playwright.create();
-    }
-
-    @BeforeTest
-    protected void beforeTest() {
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
     }
 
     @BeforeMethod
-    protected void beforeMethod() {
+    protected void createContextAndPage() {
+
         context = browser.newContext();
         page = context.newPage();
 
@@ -33,12 +30,12 @@ public abstract class BaseTest {
     }
 
     @AfterMethod
-    protected void afterMethod() {
+    void closeContext() {
         context.close();
     }
 
-    @AfterSuite
-    protected void afterSuits() {
+    @AfterClass
+    protected void closeBrowser() {
         playwright.close();
     }
 }
