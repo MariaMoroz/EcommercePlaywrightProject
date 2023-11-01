@@ -11,7 +11,7 @@ public class HomePageTest extends BaseTest {
     public void verifyHomeUrlAndTitle() {
 
         String expectedHomeURL = "https://magento.softwaretestingboard.com/";
-        String expectedHomeTitle = "Home Pag";
+        String expectedHomeTitle = "Home Page";
 
         assertThat(getPage()).hasURL(expectedHomeURL);
         assertThat(getPage()).hasTitle(expectedHomeTitle);
