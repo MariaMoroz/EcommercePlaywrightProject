@@ -2,19 +2,19 @@ import base.BaseTest;
 
 import com.microsoft.playwright.Locator;
 import org.testng.annotations.Test;
+import utils.TestData;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static utils.ProjectConstants.BASE_URL;
+import static utils.ProjectConstants.EXPECTED_HOME_TITLE;
 
 public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyHomeUrlAndTitle() {
 
-        String expectedHomeURL = "https://magento.softwaretestingboard.com/";
-        String expectedHomeTitle = "Home Page";
-
-        assertThat(getPage()).hasURL(expectedHomeURL);
-        assertThat(getPage()).hasTitle(expectedHomeTitle);
+        assertThat(getPage()).hasURL(BASE_URL);
+        assertThat(getPage()).hasTitle(EXPECTED_HOME_TITLE);
     }
 
     @Test
@@ -52,5 +52,18 @@ public class HomePageTest extends BaseTest {
         assertThat(navigationMenu).isVisible();
         assertThat(menuItems).hasCount(expectedMenuItems.length);
         assertThat(menuItems).hasText(expectedMenuItems);
+    }
+
+
+    @Test(dataProvider = "NavigationBarTestData", dataProviderClass = TestData.class)
+    public void verifyNavigationMenuBar(String cssSelector, String expectedUrl, String expectedTitle) {
+
+        assertThat(getPage()).hasURL(BASE_URL);
+        assertThat(getPage()).hasTitle(EXPECTED_HOME_TITLE);
+
+        getPage().locator(cssSelector).click();
+
+        assertThat(getPage()).hasURL(BASE_URL + expectedUrl);
+        assertThat(getPage()).hasTitle(expectedTitle);
     }
 }
