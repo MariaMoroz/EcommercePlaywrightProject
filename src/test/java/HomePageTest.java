@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 import utils.TestData;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-import static utils.ProjectConstants.BASE_URL;
-import static utils.ProjectConstants.EXPECTED_HOME_TITLE;
+import static utils.ProjectConstants.*;
 
 public class HomePageTest extends BaseTest {
 
@@ -38,11 +37,15 @@ public class HomePageTest extends BaseTest {
     @Test
     public void verifyCheckoutCart() {
         Locator checkoutCartBtn = getPage().locator("css=a.showcart[href*='checkout/cart']");
-        checkoutCartBtn.click();
-        Locator blockContent = getPage().locator("css=div#minicart-content-wrapper div.block-content strong");
 
-        assertThat(checkoutCartBtn).isVisible();
-        assertThat(blockContent).hasText("You have no items in your shopping cart.");
+        checkoutCartBtn.click();
+        Locator pageTitle = getPage().locator("css=h1.page-title");
+        Locator textMsg = getPage().locator("css=div.cart-empty p:first-child");
+
+        assertThat(getPage()).hasURL(BASE_URL + EXPECTED_CHECKOUT_CART_URL);
+        assertThat(pageTitle).isVisible();
+        assertThat(pageTitle).hasText(EXPECTED_CART_PAGE_TITLE);
+        assertThat(textMsg).hasText(EXPECTED_EMPTY_CART_MESSAGE);
     }
 
     @Test
