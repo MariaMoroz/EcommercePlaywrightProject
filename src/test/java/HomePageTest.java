@@ -22,6 +22,9 @@ public class HomePageTest extends BaseTest {
         Locator logoIng = getPage().locator("css=a.logo img[src*='logo.svg']");
 
         assertThat(logoIng).isVisible();
+        logoIng.click();
+
+        assertThat(getPage()).hasURL(BASE_URL);
     }
 
     @Test
