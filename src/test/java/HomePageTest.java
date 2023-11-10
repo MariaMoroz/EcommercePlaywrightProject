@@ -30,6 +30,7 @@ public class HomePageTest extends BaseTest {
     public void verifyInputSearch() {
         Locator inputSearchField = getPage().locator("css=input#search");
 
+        assertThat(getPage()).hasURL(BASE_URL);
         assertThat(inputSearchField).isVisible();
         assertThat(inputSearchField).hasAttribute("placeholder", "Search entire store here...");
     }
