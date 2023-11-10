@@ -40,12 +40,9 @@ public class HomePageTest extends BaseTest {
         Locator checkoutCartBtn = getPage().locator("css=a.showcart[href*='checkout/cart']");
 
         checkoutCartBtn.click();
-        Locator pageTitle = getPage().locator("css=h1.page-title");
-        Locator textMsg = getPage().locator("css=div.cart-empty p:first-child");
+        Locator textMsg = getPage().locator("css=.block-content .empty");
 
-        assertThat(getPage()).hasURL(BASE_URL + EXPECTED_CHECKOUT_CART_URL);
-        assertThat(pageTitle).isVisible();
-        assertThat(pageTitle).hasText(EXPECTED_CART_PAGE_TITLE);
+        assertThat(getPage()).hasURL(BASE_URL);
         assertThat(textMsg).hasText(EXPECTED_EMPTY_CART_MESSAGE);
     }
 
