@@ -37,7 +37,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyCheckoutCart() {
-        Locator checkoutCartBtn = getPage().locator("css=a.showcart[href*='checkout/cart']");
+        Locator checkoutCartBtn = getPage().locator("css=div.minicart-wrapper");
 
         checkoutCartBtn.click();
         Locator textMsg = getPage().locator("css=.block-content .empty");
