@@ -3,7 +3,9 @@ package base;
 import com.microsoft.playwright.*;
 import org.testng.annotations.*;
 
-public abstract class BaseTest {
+import java.nio.file.Paths;
+
+public class BaseTest {
     private  Playwright playwright;
     private  Browser browser;
 
@@ -24,18 +26,26 @@ public abstract class BaseTest {
     protected void createContextAndPage() {
 
         context = browser.newContext();
+        context.tracing().start(new Tracing.StartOptions()
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
         page = context.newPage();
 
         page.navigate("https://magento.softwaretestingboard.com/");
     }
 
     @AfterMethod
-    void closeContext() {
+    protected void closeContext() {
+        context.tracing()
+                .stop(new Tracing.StopOptions()
+                        .setPath(Paths.get("trace.zip")));
         context.close();
     }
 
     @AfterClass
     protected void closeBrowser() {
+        browser.close();
         playwright.close();
     }
 }

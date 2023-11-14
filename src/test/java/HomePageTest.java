@@ -1,6 +1,7 @@
 import base.BaseTest;
 
 import com.microsoft.playwright.Locator;
+
 import org.testng.annotations.Test;
 import utils.TestData;
 
@@ -18,6 +19,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyLogo() {
+
         Locator logoIng = getPage().locator("css=a.logo img[src*='logo.svg']");
 
         assertThat(logoIng).isVisible();
@@ -28,6 +30,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyInputSearch() {
+
         Locator inputSearchField = getPage().locator("css=input#search");
 
         assertThat(getPage()).hasURL(BASE_URL);
@@ -37,6 +40,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyCheckoutCart() {
+
         Locator checkoutCartBtn = getPage().locator("css=div.minicart-wrapper");
 
         checkoutCartBtn.click();
@@ -48,6 +52,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyNavigationMenu() {
+
         String[] expectedMenuItems = {"What's New", "Women", "Men", "Gear", "Training", "Sale"};
 
         Locator navigationMenu = getPage().locator("css=div[id='store.menu'] nav.navigation");
@@ -70,4 +75,16 @@ public class HomePageTest extends BaseTest {
         assertThat(getPage()).hasURL(BASE_URL + expectedUrl);
         assertThat(getPage()).hasTitle(expectedTitle);
     }
+    @Test
+    public void verifyJacketsPage() {
+        //        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName(Pattern.compile("Men"))).hover();
+        getPage().locator(".navigation ul li a[href*='/men.html']").hover();
+//        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Tops")).hover();
+        getPage().locator(".navigation ul li a[href*='/men/tops-men.html']").hover();
+//        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Jackets")).click();
+        getPage().locator(".navigation ul li a[href*='/men/tops-men/jackets-men.html']").click();
+
+    assertThat(getPage()).hasTitle("Jackets - Tops - Men");
+    assertThat(getPage()).hasURL("https://magento.softwaretestingboard.com/men/tops-men/jackets-men.html");
+}
 }
