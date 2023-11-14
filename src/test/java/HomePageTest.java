@@ -85,7 +85,7 @@ public class HomePageTest extends BaseTest {
 //        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Jackets")).click();
         getPage().locator(".navigation ul li a[href*='/men/tops-men/jackets-men.html']").click();
 
-        assertThat(getPage()).hasTitle("");
+        assertThat(getPage()).hasTitle("Jackets - Tops - Men");
         assertThat(getPage()).hasURL("https://magento.softwaretestingboard.com/men/tops-men/jackets-men.html");
     }
 }
