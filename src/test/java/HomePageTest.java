@@ -75,4 +75,17 @@ public class HomePageTest extends BaseTest {
         assertThat(getPage()).hasURL(BASE_URL + expectedUrl);
         assertThat(getPage()).hasTitle(expectedTitle);
     }
+
+    @Test
+    public void verifyJacketsPage() {
+        //        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName(Pattern.compile("Men"))).hover();
+        getPage().locator(".navigation ul li a[href*='/men.html']").hover();
+//        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Tops")).hover();
+        getPage().locator(".navigation ul li a[href*='/men/tops-men.html']").hover();
+//        getPage().getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Jackets")).click();
+        getPage().locator(".navigation ul li a[href*='/men/tops-men/jackets-men.html']").click();
+
+        assertThat(getPage()).hasTitle("Jackets - Tops - Men");
+        assertThat(getPage()).hasURL("https://magento.softwaretestingboard.com/men/tops-men/jackets-men.html");
+    }
 }
